@@ -1,0 +1,123 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Web\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4129ACE0-80C2-4CA5-A0CA-BDE45E920E30}|..\\SalonBookingSystem.Domain\\SalonBookingSystem.Domain.csproj|d:\\db\\salonbookingmanagementsystem\\salonbookingsystem.domain\\entities\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3C36436-10F6-4B82-9F25-1025909639D0}|..\\SalonBookingSystem.API\\SalonBookingSystem.API.csproj|d:\\db\\salonbookingmanagementsystem\\salonbookingsystem.api\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4129ACE0-80C2-4CA5-A0CA-BDE45E920E30}|..\\SalonBookingSystem.Domain\\SalonBookingSystem.Domain.csproj|d:\\db\\salonbookingmanagementsystem\\salonbookingsystem.domain\\common\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3C36436-10F6-4B82-9F25-1025909639D0}|..\\SalonBookingSystem.API\\SalonBookingSystem.API.csproj|d:\\db\\salonbookingmanagementsystem\\salonbookingsystem.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF5317FA-A922-464F-AD2E-42A8A4FE87A1}|SalonBookingSystem.Web.csproj|d:\\db\\salonbookingmanagementsystem\\salonbookingsystem.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF5317FA-A922-464F-AD2E-42A8A4FE87A1}|SalonBookingSystem.Web.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AQIAAFsTAAAAAAAAAADgv2sTAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2026-06-24T11:26:21.663Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomersController.cs",
+              "DocumentMoniker": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.API\\Controllers\\CustomersController.cs",
+              "RelativeDocumentMoniker": "..\\SalonBookingSystem.API\\Controllers\\CustomersController.cs",
+              "ToolTip": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.API\\Controllers\\CustomersController.cs",
+              "RelativeToolTip": "..\\SalonBookingSystem.API\\Controllers\\CustomersController.cs",
+              "ViewState": "AQIAACQAAAAAAAAAAAAowDYAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T11:09:37.134Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BaseEntity.cs",
+              "DocumentMoniker": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Domain\\Common\\BaseEntity.cs",
+              "RelativeDocumentMoniker": "..\\SalonBookingSystem.Domain\\Common\\BaseEntity.cs",
+              "ToolTip": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Domain\\Common\\BaseEntity.cs",
+              "RelativeToolTip": "..\\SalonBookingSystem.Domain\\Common\\BaseEntity.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:58:01.11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Customer.cs",
+              "DocumentMoniker": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Domain\\Entities\\Customer.cs",
+              "RelativeDocumentMoniker": "..\\SalonBookingSystem.Domain\\Entities\\Customer.cs",
+              "ToolTip": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Domain\\Entities\\Customer.cs",
+              "RelativeToolTip": "..\\SalonBookingSystem.Domain\\Entities\\Customer.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAA1wAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:57:54.863Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.API\\appsettings.json",
+              "RelativeDocumentMoniker": "..\\SalonBookingSystem.API\\appsettings.json",
+              "ToolTip": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.API\\appsettings.json",
+              "RelativeToolTip": "..\\SalonBookingSystem.API\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-24T10:57:25.488Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Web\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Web\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:57:18.266Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

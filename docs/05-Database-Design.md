@@ -51,11 +51,11 @@ Auto Increment:
 
 All business tables shall contain:
 
-* CreatedAt
-* CreatedBy
-* UpdatedAt
-* UpdatedBy
-* IsDeleted
+* CreatedAt (datetime2)
+* CreatedBy (int)
+* UpdatedAt (datetime2, nullable)
+* UpdatedBy (int, nullable)
+* IsDeleted (bit)
 
 ---
 

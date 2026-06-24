@@ -342,12 +342,12 @@ All entities shall inherit from BaseEntity.
 
 Audit Fields:
 
-* Id
-* CreatedAt
-* CreatedBy
-* UpdatedAt
-* UpdatedBy
-* IsDeleted
+* Id (int)
+* CreatedAt (DateTime)
+* CreatedBy (int)
+* UpdatedAt (DateTime?)
+* UpdatedBy (int?)
+* IsDeleted (bool)
 
 ---
 

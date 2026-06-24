@@ -33,11 +33,9 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
             .HasMaxLength(450);
 
         builder.Property(c => c.CreatedBy)
-            .IsRequired()
-            .HasMaxLength(450);
+            .IsRequired();
 
-        builder.Property(c => c.UpdatedBy)
-            .HasMaxLength(450);
+        builder.Property(c => c.UpdatedBy);
 
         builder.HasIndex(c => c.Email);
 

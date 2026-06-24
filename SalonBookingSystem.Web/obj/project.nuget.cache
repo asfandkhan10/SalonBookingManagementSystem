@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JcyQT4fpWcg=",
+  "dgSpecHash": "0pwD/QWUg9YElQDHKMpYj42P9AvoCthNaucZMyMvJhDe0BB/Ws2NEc1Ns98PZluY61JjEtf3uHvPiMxBcsWlOw==",
   "success": true,
-  "projectFilePath": "E:\\Projectsof2026\\SalonBookingManagementSystem\\SalonBookingSystem.Web\\SalonBookingSystem.Web.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Huzaifa\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.23\\microsoft.netcore.app.ref.8.0.23.nupkg.sha512",
-    "C:\\Users\\Huzaifa\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.23\\microsoft.windowsdesktop.app.ref.8.0.23.nupkg.sha512",
-    "C:\\Users\\Huzaifa\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.23\\microsoft.aspnetcore.app.ref.8.0.23.nupkg.sha512",
-    "C:\\Users\\Huzaifa\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.23\\microsoft.netcore.app.host.win-x64.8.0.23.nupkg.sha512"
-  ],
+  "projectFilePath": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Web\\SalonBookingSystem.Web.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

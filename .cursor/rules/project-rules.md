@@ -260,17 +260,17 @@ BaseEntity contains:
 
 
 
-\* Id
+\* Id (int)
 
-\* CreatedAt
+\* CreatedAt (DateTime)
 
-\* CreatedBy
+\* CreatedBy (int)
 
-\* UpdatedAt
+\* UpdatedAt (DateTime?)
 
-\* UpdatedBy
+\* UpdatedBy (int?)
 
-\* IsDeleted
+\* IsDeleted (bool)
 
 
 
@@ -295,6 +295,16 @@ Identity:
 
 
 \# Audit Rules
+
+
+
+Audit field types:
+
+
+
+\* CreatedBy — int
+
+\* UpdatedBy — int?
 
 
 

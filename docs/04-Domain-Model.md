@@ -12,12 +12,12 @@ All business entities inherit from BaseEntity.
 
 ## Properties
 
-* Id
-* CreatedAt
-* CreatedBy
-* UpdatedAt
-* UpdatedBy
-* IsDeleted
+* Id (int)
+* CreatedAt (DateTime)
+* CreatedBy (int)
+* UpdatedAt (DateTime?)
+* UpdatedBy (int?)
+* IsDeleted (bool)
 
 ## Audit Rules
 

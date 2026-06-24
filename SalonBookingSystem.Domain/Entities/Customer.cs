@@ -12,5 +12,5 @@ public class Customer : BaseEntity
 
     public string PhoneNumber { get; set; } = string.Empty;
 
-    public int? ApplicationUserId { get; set; }
+    public string? ApplicationUserId { get; set; }
 }

@@ -16,9 +16,9 @@ public class CustomerResponse
 
     public DateTime CreatedAt { get; set; }
 
-    public string CreatedBy { get; set; } = string.Empty;
+    public int CreatedBy { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
 
-    public string? UpdatedBy { get; set; }
+    public int? UpdatedBy { get; set; }
 }
