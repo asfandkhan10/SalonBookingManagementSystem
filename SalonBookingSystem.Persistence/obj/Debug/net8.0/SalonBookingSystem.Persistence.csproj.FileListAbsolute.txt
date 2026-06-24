@@ -1,0 +1,5 @@
+E:\Projectsof2026\SalonBookingManagementSystem\SalonBookingSystem.Persistence\obj\Debug\net8.0\SalonBookingSystem.Persistence.csproj.AssemblyReference.cache
+E:\Projectsof2026\SalonBookingManagementSystem\SalonBookingSystem.Persistence\obj\Debug\net8.0\SalonBookingSystem.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projectsof2026\SalonBookingManagementSystem\SalonBookingSystem.Persistence\obj\Debug\net8.0\SalonBookingSystem.Persistence.AssemblyInfoInputs.cache
+E:\Projectsof2026\SalonBookingManagementSystem\SalonBookingSystem.Persistence\obj\Debug\net8.0\SalonBookingSystem.Persistence.AssemblyInfo.cs
+E:\Projectsof2026\SalonBookingManagementSystem\SalonBookingSystem.Persistence\obj\Debug\net8.0\SalonBookingSystem.Persistence.csproj.CoreCompileInputs.cache

@@ -1,0 +1,6 @@
+E:\Projectsof2026\SalonBookingManagementSystem\SalonBookingSystem.API\obj\Debug\net8.0\SalonBookingSystem.API.csproj.AssemblyReference.cache
+E:\Projectsof2026\SalonBookingManagementSystem\SalonBookingSystem.API\obj\Debug\net8.0\SalonBookingSystem.API.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projectsof2026\SalonBookingManagementSystem\SalonBookingSystem.API\obj\Debug\net8.0\SalonBookingSystem.API.AssemblyInfoInputs.cache
+E:\Projectsof2026\SalonBookingManagementSystem\SalonBookingSystem.API\obj\Debug\net8.0\SalonBookingSystem.API.AssemblyInfo.cs
+E:\Projectsof2026\SalonBookingManagementSystem\SalonBookingSystem.API\obj\Debug\net8.0\SalonBookingSystem.API.csproj.CoreCompileInputs.cache
+E:\Projectsof2026\SalonBookingManagementSystem\SalonBookingSystem.API\obj\Debug\net8.0\SalonBookingSystem.API.MvcApplicationPartsAssemblyInfo.cache

@@ -1,0 +1,6 @@
+@SalonBookingSystem.API_HostAddress = http://localhost:5252
+
+GET {{SalonBookingSystem.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
