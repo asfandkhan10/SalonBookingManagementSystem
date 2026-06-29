@@ -17,6 +17,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<BarberSchedule> BarberSchedules => Set<BarberSchedule>();
 
+    public DbSet<Service> Services => Set<Service>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

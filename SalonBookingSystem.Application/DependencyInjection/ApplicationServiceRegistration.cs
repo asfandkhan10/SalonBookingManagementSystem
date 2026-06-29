@@ -14,6 +14,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ICustomerService, CustomerService>();
         services.AddScoped<IBarberService, BarberService>();
         services.AddScoped<IBarberScheduleService, BarberScheduleService>();
+        services.AddScoped<IServiceService, ServiceService>();
 
         return services;
     }
