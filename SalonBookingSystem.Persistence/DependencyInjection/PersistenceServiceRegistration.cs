@@ -17,6 +17,7 @@ public static class PersistenceServiceRegistration
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<IBarberRepository, BarberRepository>();
 
         return services;
     }

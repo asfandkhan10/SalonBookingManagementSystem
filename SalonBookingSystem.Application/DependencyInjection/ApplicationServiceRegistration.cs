@@ -12,6 +12,7 @@ public static class ApplicationServiceRegistration
     {
         services.AddValidatorsFromAssemblyContaining<CreateCustomerValidator>();
         services.AddScoped<ICustomerService, CustomerService>();
+        services.AddScoped<IBarberService, BarberService>();
 
         return services;
     }
