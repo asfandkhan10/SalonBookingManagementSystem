@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SalonBookingSystem.Application
-build_property.ProjectDir = D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\
+build_property.ProjectDir = E:\SalonBookingManagementSystem\SalonBookingSystem.Application\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

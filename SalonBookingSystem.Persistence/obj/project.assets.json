@@ -4290,25 +4290,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shira\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Haseeb-PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Persistence\\SalonBookingSystem.Persistence.csproj",
+      "projectUniqueName": "E:\\SalonBookingManagementSystem\\SalonBookingSystem.Persistence\\SalonBookingSystem.Persistence.csproj",
       "projectName": "SalonBookingSystem.Persistence",
-      "projectPath": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Persistence\\SalonBookingSystem.Persistence.csproj",
-      "packagesPath": "C:\\Users\\shira\\.nuget\\packages\\",
-      "outputPath": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Persistence\\obj\\",
+      "projectPath": "E:\\SalonBookingManagementSystem\\SalonBookingSystem.Persistence\\SalonBookingSystem.Persistence.csproj",
+      "packagesPath": "C:\\Users\\Haseeb-PC\\.nuget\\packages\\",
+      "outputPath": "E:\\SalonBookingManagementSystem\\SalonBookingSystem.Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "centralPackageVersionsManagementEnabled": true,
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\shira\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Haseeb-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4316,15 +4311,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Application\\SalonBookingSystem.Application.csproj": {
-              "projectPath": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Application\\SalonBookingSystem.Application.csproj"
+            "E:\\SalonBookingManagementSystem\\SalonBookingSystem.Application\\SalonBookingSystem.Application.csproj": {
+              "projectPath": "E:\\SalonBookingManagementSystem\\SalonBookingSystem.Application\\SalonBookingSystem.Application.csproj"
             }
           }
         }
@@ -4395,7 +4389,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.319/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

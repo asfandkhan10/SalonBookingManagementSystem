@@ -21,3 +21,15 @@ D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\Sa
 D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\refint\SalonBookingSystem.Domain.dll
 D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\SalonBookingSystem.Domain.pdb
 D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\ref\SalonBookingSystem.Domain.dll
+E:\SalonBookingManagementSystem\SalonBookingSystem.Domain\bin\Debug\net8.0\SalonBookingSystem.Domain.deps.json
+E:\SalonBookingManagementSystem\SalonBookingSystem.Domain\bin\Debug\net8.0\SalonBookingSystem.Domain.dll
+E:\SalonBookingManagementSystem\SalonBookingSystem.Domain\bin\Debug\net8.0\SalonBookingSystem.Domain.pdb
+E:\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\SalonBookingSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\SalonBookingSystem.Domain.AssemblyInfoInputs.cache
+E:\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\SalonBookingSystem.Domain.AssemblyInfo.cs
+E:\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\SalonBookingSystem.Domain.csproj.CoreCompileInputs.cache
+E:\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\SalonBookingSystem.Domain.sourcelink.json
+E:\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\SalonBookingSystem.Domain.dll
+E:\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\refint\SalonBookingSystem.Domain.dll
+E:\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\SalonBookingSystem.Domain.pdb
+E:\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Debug\net8.0\ref\SalonBookingSystem.Domain.dll
