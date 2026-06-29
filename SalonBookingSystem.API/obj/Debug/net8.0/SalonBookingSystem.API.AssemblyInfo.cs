@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SalonBookingSystem.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a6307ee8bc6c9107b441e8be7c2174140c9cc126")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f01846aa81bb2f3efe2db6f7161b58409bc439a6")]
 [assembly: System.Reflection.AssemblyProductAttribute("SalonBookingSystem.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SalonBookingSystem.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

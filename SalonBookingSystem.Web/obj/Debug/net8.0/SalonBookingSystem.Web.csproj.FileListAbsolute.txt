@@ -46,11 +46,6 @@ D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\Salon
 D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\SalonBookingSystem.Web.sourcelink.json
 D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\staticwebassets.build.json
 D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\staticwebassets.development.json
-D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\staticwebassets\msbuild.SalonBookingSystem.Web.Microsoft.AspNetCore.StaticWebAssets.props
-D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\staticwebassets\msbuild.build.SalonBookingSystem.Web.props
-D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SalonBookingSystem.Web.props
-D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SalonBookingSystem.Web.props
-D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\staticwebassets.pack.json
 D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
 D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\scopedcss\bundle\SalonBookingSystem.Web.styles.css
 D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\scopedcss\projectbundle\SalonBookingSystem.Web.bundle.scp.css
@@ -59,3 +54,11 @@ D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\refin
 D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\SalonBookingSystem.Web.pdb
 D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\SalonBookingSystem.Web.genruntimeconfig.cache
 D:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\ref\SalonBookingSystem.Web.dll
+d:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\bin\Debug\net8.0\SalonBookingSystem.Web.staticwebassets.endpoints.json
+d:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\rpswa.dswa.cache.json
+d:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\rjimswa.dswa.cache.json
+d:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+d:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+d:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\staticwebassets.build.json.cache
+d:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+d:\db\SalonBookingManagementSystem\SalonBookingSystem.Web\obj\Debug\net8.0\swae.build.ex.cache

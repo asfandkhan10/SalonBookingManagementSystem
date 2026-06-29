@@ -203,6 +203,48 @@ namespace SalonBookingSystem.Persistence.Migrations
                     b.ToTable("Barbers", (string)null);
                 });
 
+            modelBuilder.Entity("SalonBookingSystem.Domain.Entities.BarberSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BarberId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BarberId", "DayOfWeek");
+
+                    b.ToTable("BarberSchedules", (string)null);
+                });
+
             modelBuilder.Entity("SalonBookingSystem.Domain.Entities.Customer", b =>
                 {
                     b.Property<int>("Id")
