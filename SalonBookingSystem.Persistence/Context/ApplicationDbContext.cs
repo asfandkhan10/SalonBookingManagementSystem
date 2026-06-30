@@ -19,6 +19,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<Service> Services => Set<Service>();
 
+    public DbSet<Appointment> Appointments => Set<Appointment>();
+
+    public DbSet<AppointmentService> AppointmentServices => Set<AppointmentService>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
