@@ -32,6 +32,11 @@ public interface IAppointmentService
         int id,
         CancellationToken cancellationToken = default);
 
+    Task<AppointmentResponse?> RescheduleAppointmentAsync(
+        int id,
+        RescheduleAppointmentRequest request,
+        CancellationToken cancellationToken = default);
+
     Task<bool> CompleteAppointmentAsync(
         int id,
         CancellationToken cancellationToken = default);

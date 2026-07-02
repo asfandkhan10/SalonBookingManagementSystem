@@ -62,4 +62,18 @@ public class CustomerRepository : ICustomerRepository
         _context.Customers.Update(customer);
         await _context.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task<Customer?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
+    {
+        return await _context.Customers
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Email == email, cancellationToken);
+    }
+
+    public async Task<Customer?> GetByApplicationUserIdAsync(string applicationUserId, CancellationToken cancellationToken = default)
+    {
+        return await _context.Customers
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.ApplicationUserId == applicationUserId, cancellationToken);
+    }
 }

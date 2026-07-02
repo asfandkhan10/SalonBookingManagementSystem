@@ -14,4 +14,8 @@ public interface ICustomerRepository
     Task<Customer> CreateAsync(Customer customer, CancellationToken cancellationToken = default);
 
     Task UpdateAsync(Customer customer, CancellationToken cancellationToken = default);
+
+    Task<Customer?> GetByEmailAsync(string email, CancellationToken cancellationToken = default);
+
+    Task<Customer?> GetByApplicationUserIdAsync(string applicationUserId, CancellationToken cancellationToken = default);
 }

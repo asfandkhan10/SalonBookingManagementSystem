@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SalonBookingSystem.Application\SalonBookingSystem.Application.csproj" />
+    <ProjectReference Include="..\SalonBookingSystem.Persistence\SalonBookingSystem.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

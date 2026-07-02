@@ -34,9 +34,13 @@ public class GlobalExceptionMiddleware
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             context.Response.ContentType = "application/json";
 
-            var response = ApiResponse<object>.Fail(
-                "Validation failed.",
-                ex.Errors.Select(e => e.ErrorMessage).ToList());
+            // ex.Errors is empty when ValidationException is thrown with a plain string message.
+            // Fall back to ex.Message so the caller always sees the actual reason.
+            var errors = ex.Errors.Any()
+                ? ex.Errors.Select(e => e.ErrorMessage).ToList()
+                : new List<string> { ex.Message };
+
+            var response = ApiResponse<object>.Fail("Validation failed.", errors);
 
             await context.Response.WriteAsync(JsonSerializer.Serialize(response, JsonOptions));
         }

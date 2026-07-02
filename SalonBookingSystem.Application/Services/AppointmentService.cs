@@ -16,6 +16,7 @@ public class AppointmentService : IAppointmentService
     private readonly ICurrentUserService _currentUserService;
     private readonly IValidator<CreateAppointmentRequest> _createValidator;
     private readonly IValidator<UpdateAppointmentRequest> _updateValidator;
+    private readonly IValidator<RescheduleAppointmentRequest> _rescheduleValidator;
     private readonly ILogger<AppointmentService> _logger;
 
     public AppointmentService(
@@ -26,6 +27,7 @@ public class AppointmentService : IAppointmentService
         ICurrentUserService currentUserService,
         IValidator<CreateAppointmentRequest> createValidator,
         IValidator<UpdateAppointmentRequest> updateValidator,
+        IValidator<RescheduleAppointmentRequest> rescheduleValidator,
         ILogger<AppointmentService> logger)
     {
         _appointmentRepository = appointmentRepository;
@@ -35,6 +37,7 @@ public class AppointmentService : IAppointmentService
         _currentUserService = currentUserService;
         _createValidator = createValidator;
         _updateValidator = updateValidator;
+        _rescheduleValidator = rescheduleValidator;
         _logger = logger;
     }
 
@@ -52,9 +55,9 @@ public class AppointmentService : IAppointmentService
         appointment.CreatedBy = userId;
         appointment.IsDeleted = false;
 
+        await CalculateTotalsAsync(appointment, request.ServiceIds, cancellationToken);
         await ValidateNoOverlapAsync(appointment, null, cancellationToken);
         await ValidateBarberScheduleAsync(appointment, cancellationToken);
-        await CalculateTotalsAsync(appointment, request.ServiceIds, cancellationToken);
 
         var created = await _appointmentRepository.CreateAsync(appointment, cancellationToken);
 
@@ -80,6 +83,7 @@ public class AppointmentService : IAppointmentService
 
         appointment.ApplyUpdate(request);
 
+        await CalculateTotalsAsync(appointment, request.ServiceIds, cancellationToken);
         await ValidateNoOverlapAsync(appointment, id, cancellationToken);
         await ValidateBarberScheduleAsync(appointment, cancellationToken);
 
@@ -149,6 +153,58 @@ public class AppointmentService : IAppointmentService
         return true;
     }
 
+    public async Task<AppointmentResponse?> RescheduleAppointmentAsync(
+        int id,
+        RescheduleAppointmentRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        await ValidateAsync(_rescheduleValidator, request, cancellationToken);
+
+        var appointment = await _appointmentRepository.GetByIdAsync(id, cancellationToken);
+        if (appointment is null)
+        {
+            return null;
+        }
+
+        // Only allow rescheduling if appointment is not already cancelled or completed
+        if (appointment.Status == Domain.Enums.AppointmentStatus.Cancelled)
+        {
+            throw new ValidationException(new[]
+            {
+                new FluentValidation.Results.ValidationFailure(nameof(appointment.Status), "Cannot reschedule a cancelled appointment.")
+            });
+        }
+
+        if (appointment.Status == Domain.Enums.AppointmentStatus.Completed)
+        {
+            throw new ValidationException(new[]
+            {
+                new FluentValidation.Results.ValidationFailure(nameof(appointment.Status), "Cannot reschedule a completed appointment.")
+            });
+        }
+
+        // Update appointment date and time
+        appointment.AppointmentDate = request.NewAppointmentDate;
+        appointment.StartTime = TimeSpan.Parse(request.NewStartTime);
+
+        // Recalculate end time based on total duration
+        appointment.EndTime = appointment.StartTime.Add(TimeSpan.FromMinutes(appointment.TotalDurationMinutes));
+
+        // Validate no overlap with other appointments
+        await ValidateNoOverlapAsync(appointment, id, cancellationToken);
+        await ValidateBarberScheduleAsync(appointment, cancellationToken);
+
+        var userId = _currentUserService.GetUserId();
+        appointment.UpdatedAt = DateTime.UtcNow;
+        appointment.UpdatedBy = userId;
+
+        await _appointmentRepository.UpdateAsync(appointment, cancellationToken);
+
+        _logger.LogInformation("Appointment {AppointmentId} rescheduled to {NewDate} at {NewTime} by {UserId}", id, request.NewAppointmentDate, request.NewStartTime, userId);
+
+        return appointment.ToResponse();
+    }
+
     public async Task<bool> CompleteAppointmentAsync(
         int id,
         CancellationToken cancellationToken = default)
@@ -177,7 +233,7 @@ public class AppointmentService : IAppointmentService
         int durationMinutes,
         CancellationToken cancellationToken = default)
     {
-        var dayOfWeek = (Domain.Enums.DayOfWeek)appointmentDate.DayOfWeek;
+        var dayOfWeek = ToCustomDayOfWeek(appointmentDate.DayOfWeek);
         var barberSchedule = await _barberScheduleRepository.GetByBarberIdAndDayOfWeekAsync(barberId, dayOfWeek, cancellationToken);
 
         if (barberSchedule == null || barberSchedule.Count == 0)
@@ -236,7 +292,10 @@ public class AppointmentService : IAppointmentService
 
             if (AppointmentsOverlap(appointment.StartTime, appointment.EndTime, existing.StartTime, existing.EndTime))
             {
-                throw new ValidationException("Appointment overlaps with an existing appointment for the same barber.");
+                throw new ValidationException(new[]
+                {
+                    new FluentValidation.Results.ValidationFailure(nameof(appointment.StartTime), "Appointment overlaps with an existing appointment for the same barber.")
+                });
             }
         }
     }
@@ -245,7 +304,7 @@ public class AppointmentService : IAppointmentService
         Appointment appointment,
         CancellationToken cancellationToken = default)
     {
-        var dayOfWeek = (Domain.Enums.DayOfWeek)appointment.AppointmentDate.DayOfWeek;
+        var dayOfWeek = ToCustomDayOfWeek(appointment.AppointmentDate.DayOfWeek);
         var barberSchedule = await _barberScheduleRepository.GetByBarberIdAndDayOfWeekAsync(
             appointment.BarberId,
             dayOfWeek,
@@ -253,7 +312,10 @@ public class AppointmentService : IAppointmentService
 
         if (barberSchedule == null || barberSchedule.Count == 0)
         {
-            throw new ValidationException("Barber is not scheduled to work on this day.");
+            throw new ValidationException(new[]
+            {
+                new FluentValidation.Results.ValidationFailure(nameof(appointment.BarberId), "Barber is not scheduled to work on this day.")
+            });
         }
 
         var isWithinSchedule = barberSchedule.Any(s =>
@@ -262,7 +324,10 @@ public class AppointmentService : IAppointmentService
 
         if (!isWithinSchedule)
         {
-            throw new ValidationException("Appointment time is outside the barber's working schedule.");
+            throw new ValidationException(new[]
+            {
+                new FluentValidation.Results.ValidationFailure(nameof(appointment.StartTime), "Appointment time is outside the barber's working schedule.")
+            });
         }
     }
 
@@ -333,6 +398,25 @@ public class AppointmentService : IAppointmentService
     private static bool AppointmentsOverlap(TimeSpan start1, TimeSpan end1, TimeSpan start2, TimeSpan end2)
     {
         return start1 < end2 && start2 < end1;
+    }
+
+    /// <summary>
+    /// Converts System.DayOfWeek (Sunday=0) to Domain.Enums.DayOfWeek (Monday=1, Sunday=7).
+    /// System and domain enums differ for Sunday: System=0, Domain=7.
+    /// </summary>
+    private static Domain.Enums.DayOfWeek ToCustomDayOfWeek(System.DayOfWeek systemDayOfWeek)
+    {
+        return systemDayOfWeek switch
+        {
+            System.DayOfWeek.Monday    => Domain.Enums.DayOfWeek.Monday,
+            System.DayOfWeek.Tuesday   => Domain.Enums.DayOfWeek.Tuesday,
+            System.DayOfWeek.Wednesday => Domain.Enums.DayOfWeek.Wednesday,
+            System.DayOfWeek.Thursday  => Domain.Enums.DayOfWeek.Thursday,
+            System.DayOfWeek.Friday    => Domain.Enums.DayOfWeek.Friday,
+            System.DayOfWeek.Saturday  => Domain.Enums.DayOfWeek.Saturday,
+            System.DayOfWeek.Sunday    => Domain.Enums.DayOfWeek.Sunday,
+            _ => throw new ArgumentOutOfRangeException(nameof(systemDayOfWeek), systemDayOfWeek, null)
+        };
     }
 
     private static async Task ValidateAsync<T>(

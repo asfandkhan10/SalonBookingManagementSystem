@@ -131,6 +131,22 @@ public class CustomerService : ICustomerService
         return true;
     }
 
+    public async Task<CustomerResponse?> GetCustomerByEmailAsync(
+        string email,
+        CancellationToken cancellationToken = default)
+    {
+        var customer = await _customerRepository.GetByEmailAsync(email, cancellationToken);
+        return customer?.ToResponse();
+    }
+
+    public async Task<CustomerResponse?> GetCustomerByApplicationUserIdAsync(
+        string applicationUserId,
+        CancellationToken cancellationToken = default)
+    {
+        var customer = await _customerRepository.GetByApplicationUserIdAsync(applicationUserId, cancellationToken);
+        return customer?.ToResponse();
+    }
+
     private static async Task ValidateAsync<T>(
         IValidator<T> validator,
         T instance,

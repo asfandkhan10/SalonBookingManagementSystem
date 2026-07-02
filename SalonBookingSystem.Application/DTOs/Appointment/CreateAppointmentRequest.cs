@@ -10,7 +10,7 @@ public class CreateAppointmentRequest
 
     public DateTime AppointmentDate { get; set; }
 
-    public TimeSpan StartTime { get; set; }
+    public string StartTime { get; set; } = string.Empty;
 
     public List<int> ServiceIds { get; set; } = new();
 }

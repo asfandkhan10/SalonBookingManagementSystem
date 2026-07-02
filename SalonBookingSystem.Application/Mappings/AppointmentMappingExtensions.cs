@@ -33,8 +33,9 @@ public static class AppointmentMappingExtensions
             CustomerId = request.CustomerId,
             BarberId = request.BarberId,
             AppointmentDate = request.AppointmentDate,
-            StartTime = request.StartTime,
-            Status = Domain.Enums.AppointmentStatus.Pending,
+            StartTime = TimeSpan.Parse(request.StartTime),
+            // Resolution 7: newly created appointments are Confirmed directly, Pending is not used
+            Status = Domain.Enums.AppointmentStatus.Confirmed,
             TotalAmount = 0,
             TotalDurationMinutes = 0
         };
@@ -43,7 +44,7 @@ public static class AppointmentMappingExtensions
     public static void ApplyUpdate(this Appointment appointment, UpdateAppointmentRequest request)
     {
         appointment.AppointmentDate = request.AppointmentDate;
-        appointment.StartTime = request.StartTime;
+        appointment.StartTime = TimeSpan.Parse(request.StartTime);
         appointment.Status = request.Status;
     }
 

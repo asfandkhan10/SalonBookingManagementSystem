@@ -25,4 +25,12 @@ public interface ICustomerService
     Task<bool> SoftDeleteCustomerAsync(
         int id,
         CancellationToken cancellationToken = default);
+
+    Task<CustomerResponse?> GetCustomerByEmailAsync(
+        string email,
+        CancellationToken cancellationToken = default);
+
+    Task<CustomerResponse?> GetCustomerByApplicationUserIdAsync(
+        string applicationUserId,
+        CancellationToken cancellationToken = default);
 }

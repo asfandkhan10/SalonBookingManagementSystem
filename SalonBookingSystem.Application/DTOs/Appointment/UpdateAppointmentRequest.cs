@@ -6,7 +6,7 @@ public class UpdateAppointmentRequest
 {
     public DateTime AppointmentDate { get; set; }
 
-    public TimeSpan StartTime { get; set; }
+    public string StartTime { get; set; } = string.Empty;
 
     public AppointmentStatus Status { get; set; }
 

@@ -135,7 +135,12 @@ public class BarberScheduleService : IBarberScheduleService
 
             if (SchedulesOverlap(existing.StartTime, existing.EndTime, schedule.StartTime, schedule.EndTime))
             {
-                throw new ValidationException("Schedule overlaps with an existing schedule for the same day.");
+                throw new ValidationException(new[]
+                {
+                    new FluentValidation.Results.ValidationFailure(
+                        nameof(schedule.StartTime),
+                        "Schedule overlaps with an existing schedule for the same day.")
+                });
             }
         }
     }

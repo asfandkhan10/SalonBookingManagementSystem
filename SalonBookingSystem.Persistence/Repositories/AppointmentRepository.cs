@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SalonBookingSystem.Application.Interfaces;
 using SalonBookingSystem.Domain.Entities;
+using SalonBookingSystem.Domain.Enums;
 using SalonBookingSystem.Persistence.Context;
 
 namespace SalonBookingSystem.Persistence.Repositories;
@@ -57,7 +58,9 @@ public class AppointmentRepository : IAppointmentRepository
     {
         return await _context.Appointments
             .AsNoTracking()
-            .Where(a => a.BarberId == barberId && a.AppointmentDate.Date == appointmentDate.Date)
+            .Where(a => a.BarberId == barberId
+                && a.AppointmentDate.Date == appointmentDate.Date
+                && a.Status != Domain.Enums.AppointmentStatus.Cancelled)
             .OrderBy(a => a.StartTime)
             .ToListAsync(cancellationToken);
     }

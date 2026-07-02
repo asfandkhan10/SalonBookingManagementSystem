@@ -1,0 +1,12 @@
+using SalonBookingSystem.Application.DTOs.Authentication;
+
+namespace SalonBookingSystem.Application.Interfaces;
+
+public interface IAuthenticationService
+{
+    Task<AuthenticationResponse> RegisterAsync(RegisterRequest request, CancellationToken cancellationToken = default);
+
+    Task<AuthenticationResponse> LoginAsync(LoginRequest request, CancellationToken cancellationToken = default);
+
+    Task LogoutAsync(CancellationToken cancellationToken = default);
+}
