@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using SalonBookingSystem.API.Authorization;
 using SalonBookingSystem.Application.Common;
 using SalonBookingSystem.Application.DTOs.Barber;
 using SalonBookingSystem.Application.Interfaces;
 
 namespace SalonBookingSystem.API.Controllers;
 
-[ApiController]
 [Route("api/v1/barbers")]
 public class BarbersController : ControllerBase
 {
@@ -17,6 +17,7 @@ public class BarbersController : ControllerBase
     }
 
     [HttpGet]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<PagedResult<BarberResponse>>>> GetBarbers(
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 10,
@@ -35,6 +36,7 @@ public class BarbersController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [ReceptionistAuthorization]
     public async Task<ActionResult<ApiResponse<BarberResponse>>> GetBarberById(
         int id,
         CancellationToken cancellationToken = default)
@@ -49,6 +51,7 @@ public class BarbersController : ControllerBase
     }
 
     [HttpPost]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<BarberResponse>>> CreateBarber(
         [FromBody] CreateBarberRequest request,
         CancellationToken cancellationToken = default)
@@ -63,6 +66,7 @@ public class BarbersController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<BarberResponse>>> UpdateBarber(
         int id,
         [FromBody] UpdateBarberRequest request,
@@ -78,6 +82,7 @@ public class BarbersController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<object>>> DeleteBarber(
         int id,
         CancellationToken cancellationToken = default)
@@ -92,6 +97,7 @@ public class BarbersController : ControllerBase
     }
 
     [HttpPost("{id:int}/activate")]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<BarberResponse>>> ActivateBarber(
         int id,
         CancellationToken cancellationToken = default)
@@ -107,6 +113,7 @@ public class BarbersController : ControllerBase
     }
 
     [HttpPost("{id:int}/deactivate")]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<BarberResponse>>> DeactivateBarber(
         int id,
         CancellationToken cancellationToken = default)

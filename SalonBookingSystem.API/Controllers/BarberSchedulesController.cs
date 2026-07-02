@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using SalonBookingSystem.API.Authorization;
 using SalonBookingSystem.Application.Common;
 using SalonBookingSystem.Application.DTOs.BarberSchedule;
 using SalonBookingSystem.Application.Interfaces;
 
 namespace SalonBookingSystem.API.Controllers;
 
-[ApiController]
 [Route("api/v1/barbers/{barberId}/schedules")]
 public class BarberSchedulesController : ControllerBase
 {
@@ -17,6 +17,7 @@ public class BarberSchedulesController : ControllerBase
     }
 
     [HttpGet]
+    [ReceptionistAuthorization]
     public async Task<ActionResult<ApiResponse<List<BarberScheduleResponse>>>> GetBarberSchedules(
         int barberId,
         CancellationToken cancellationToken = default)
@@ -26,6 +27,7 @@ public class BarberSchedulesController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [ReceptionistAuthorization]
     public async Task<ActionResult<ApiResponse<BarberScheduleResponse>>> GetScheduleById(
         int barberId,
         int id,
@@ -41,6 +43,7 @@ public class BarberSchedulesController : ControllerBase
     }
 
     [HttpPost]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<BarberScheduleResponse>>> CreateSchedule(
         int barberId,
         [FromBody] CreateBarberScheduleRequest request,
@@ -58,6 +61,7 @@ public class BarberSchedulesController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<BarberScheduleResponse>>> UpdateSchedule(
         int barberId,
         int id,
@@ -74,6 +78,7 @@ public class BarberSchedulesController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<object>>> DeleteSchedule(
         int barberId,
         int id,

@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using SalonBookingSystem.API.Authorization;
 using SalonBookingSystem.Application.Common;
 using SalonBookingSystem.Application.DTOs.Service;
 using SalonBookingSystem.Application.Interfaces;
 
 namespace SalonBookingSystem.API.Controllers;
 
-[ApiController]
 [Route("api/v1/services")]
 public class ServicesController : ControllerBase
 {
@@ -17,6 +17,7 @@ public class ServicesController : ControllerBase
     }
 
     [HttpGet]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<PagedResult<ServiceResponse>>>> GetServices(
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 10,
@@ -35,6 +36,7 @@ public class ServicesController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [ReceptionistAuthorization]
     public async Task<ActionResult<ApiResponse<ServiceResponse>>> GetServiceById(
         int id,
         CancellationToken cancellationToken = default)
@@ -49,6 +51,7 @@ public class ServicesController : ControllerBase
     }
 
     [HttpPost]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<ServiceResponse>>> CreateService(
         [FromBody] CreateServiceRequest request,
         CancellationToken cancellationToken = default)
@@ -63,6 +66,7 @@ public class ServicesController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<ServiceResponse>>> UpdateService(
         int id,
         [FromBody] UpdateServiceRequest request,
@@ -78,6 +82,7 @@ public class ServicesController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<object>>> DeleteService(
         int id,
         CancellationToken cancellationToken = default)

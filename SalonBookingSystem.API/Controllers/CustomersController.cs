@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using SalonBookingSystem.API.Authorization;
 using SalonBookingSystem.Application.Common;
 using SalonBookingSystem.Application.DTOs.Customer;
 using SalonBookingSystem.Application.Interfaces;
 
 namespace SalonBookingSystem.API.Controllers;
 
-[ApiController]
 [Route("api/v1/customers")]
 public class CustomersController : ControllerBase
 {
@@ -17,6 +17,7 @@ public class CustomersController : ControllerBase
     }
 
     [HttpGet]
+    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<PagedResult<CustomerResponse>>>> GetCustomers(
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 10,
@@ -35,6 +36,7 @@ public class CustomersController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [ReceptionistAuthorization]
     public async Task<ActionResult<ApiResponse<CustomerResponse>>> GetCustomerById(
         int id,
         CancellationToken cancellationToken = default)
@@ -49,6 +51,7 @@ public class CustomersController : ControllerBase
     }
 
     [HttpPost]
+    [ReceptionistAuthorization]
     public async Task<ActionResult<ApiResponse<CustomerResponse>>> CreateCustomer(
         [FromBody] CreateCustomerRequest request,
         CancellationToken cancellationToken = default)
@@ -63,6 +66,7 @@ public class CustomersController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [ReceptionistAuthorization]
     public async Task<ActionResult<ApiResponse<CustomerResponse>>> UpdateCustomer(
         int id,
         [FromBody] UpdateCustomerRequest request,
@@ -78,6 +82,7 @@ public class CustomersController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [ReceptionistAuthorization]
     public async Task<ActionResult<ApiResponse<object>>> DeleteCustomer(
         int id,
         CancellationToken cancellationToken = default)

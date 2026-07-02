@@ -29,6 +29,7 @@ public class AppointmentsController : ControllerBase
     }
 
     [HttpGet]
+    [AdministratorAuthorization]
     public async Task<IActionResult> GetAppointments(CancellationToken cancellationToken)
     {
         var appointments = await _appointmentService.GetAppointmentsAsync(cancellationToken);
@@ -55,6 +56,7 @@ public class AppointmentsController : ControllerBase
     }
 
     [HttpGet("barber/{barberId}")]
+    [ReceptionistAuthorization]
     public async Task<IActionResult> GetAppointmentsByBarberId(int barberId, CancellationToken cancellationToken)
     {
         var appointments = await _appointmentService.GetAppointmentsByBarberIdAsync(barberId, cancellationToken);
@@ -195,6 +197,7 @@ public class AppointmentsController : ControllerBase
     }
 
     [HttpPost("{id}/complete")]
+    [ReceptionistAuthorization]
     public async Task<IActionResult> CompleteAppointment(int id, CancellationToken cancellationToken)
     {
         var result = await _appointmentService.CompleteAppointmentAsync(id, cancellationToken);
@@ -203,5 +206,79 @@ public class AppointmentsController : ControllerBase
             return NotFound(ApiResponse<bool>.Fail("Appointment not found"));
         }
         return Ok(ApiResponse<bool>.Ok(true, "Appointment completed successfully"));
+    }
+
+    // Receptionist/Administrator appointment management endpoints
+
+    [HttpPost("admin/create")]
+    [ReceptionistAuthorization]
+    public async Task<IActionResult> CreateAppointmentForCustomer([FromBody] CreateAppointmentRequest request, CancellationToken cancellationToken)
+    {
+        if (request == null)
+        {
+            return BadRequest(ApiResponse<object>.Fail("Request body is required."));
+        }
+
+        var validationResult = await _createValidator.ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(ApiResponse<object>.Fail("Validation failed.", validationResult.Errors.Select(e => e.ErrorMessage).ToList()));
+        }
+
+        var appointment = await _appointmentService.CreateAppointmentAsync(request, cancellationToken);
+        return CreatedAtAction(nameof(GetAppointmentById), new { id = appointment.Id }, ApiResponse<AppointmentResponse>.Ok(appointment));
+    }
+
+    [HttpPut("admin/{id}")]
+    [ReceptionistAuthorization]
+    public async Task<IActionResult> UpdateAppointmentForCustomer(int id, [FromBody] UpdateAppointmentRequest request, CancellationToken cancellationToken)
+    {
+        var validationResult = await _updateValidator.ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(ApiResponse<object>.Fail("Validation failed.", validationResult.Errors.Select(e => e.ErrorMessage).ToList()));
+        }
+
+        var updated = await _appointmentService.UpdateAppointmentAsync(id, request, cancellationToken);
+        if (updated is null)
+        {
+            return NotFound(ApiResponse<AppointmentResponse>.Fail("Appointment not found"));
+        }
+        return Ok(ApiResponse<AppointmentResponse>.Ok(updated));
+    }
+
+    [HttpPost("admin/{id}/cancel")]
+    [ReceptionistAuthorization]
+    public async Task<IActionResult> CancelAppointmentForCustomer(int id, CancellationToken cancellationToken)
+    {
+        var result = await _appointmentService.CancelAppointmentAsync(id, cancellationToken);
+        if (!result)
+        {
+            return NotFound(ApiResponse<bool>.Fail("Appointment not found"));
+        }
+        return Ok(ApiResponse<bool>.Ok(true, "Appointment cancelled successfully"));
+    }
+
+    [HttpPost("admin/{id}/reschedule")]
+    [ReceptionistAuthorization]
+    public async Task<IActionResult> RescheduleAppointmentForCustomer(int id, [FromBody] RescheduleAppointmentRequest request, CancellationToken cancellationToken)
+    {
+        if (request == null)
+        {
+            return BadRequest(ApiResponse<object>.Fail("Request body is required."));
+        }
+
+        var validationResult = await _rescheduleValidator.ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(ApiResponse<object>.Fail("Validation failed.", validationResult.Errors.Select(e => e.ErrorMessage).ToList()));
+        }
+
+        var rescheduled = await _appointmentService.RescheduleAppointmentAsync(id, request, cancellationToken);
+        if (rescheduled is null)
+        {
+            return NotFound(ApiResponse<AppointmentResponse>.Fail("Appointment not found"));
+        }
+        return Ok(ApiResponse<AppointmentResponse>.Ok(rescheduled, "Appointment rescheduled successfully"));
     }
 }
