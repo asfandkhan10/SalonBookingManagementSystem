@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "OjX49Q2ZBoowm9wI6YRK+Oe4uv8IHfL1q75Or4f/oCDfVCmEhHkMz1F5WPGBWvcd7uAr84SOIpIJWABgeQ7QkA==",
+  "success": true,
+  "projectFilePath": "D:\\db\\SalonBookingManagementSystem\\SalonBookingSystem.Application\\SalonBookingSystem.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\shira\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
+    "C:\\Users\\shira\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.11.0\\fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",
+    "C:\\Users\\shira\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\shira\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -17,7 +17,6 @@ public class BarbersController : ControllerBase
     }
 
     [HttpGet]
-    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<PagedResult<BarberResponse>>>> GetBarbers(
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 10,

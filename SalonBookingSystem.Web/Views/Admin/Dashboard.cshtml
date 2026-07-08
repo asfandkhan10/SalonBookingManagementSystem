@@ -1,0 +1,241 @@
+@model AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid py-4">
+    <h1 class="mb-4">Admin Dashboard</h1>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stat-card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="p-3 bg-primary bg-opacity-10 rounded-circle">
+                                <i class="fas fa-calendar-check text-primary fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="text-muted mb-1">Total Bookings</h6>
+                            <h3 class="fw-bold mb-0">@Model.TotalBookings</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stat-card border-0 shadow-sm" style="border-left: 4px solid #198754;">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="p-3 bg-success bg-opacity-10 rounded-circle">
+                                <i class="fas fa-dollar-sign text-success fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="text-muted mb-1">Total Revenue</h6>
+                            <h3 class="fw-bold mb-0">$@Model.TotalRevenue.ToString("0.00")</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stat-card border-0 shadow-sm" style="border-left: 4px solid #0dcaf0;">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="p-3 bg-info bg-opacity-10 rounded-circle">
+                                <i class="fas fa-clock text-info fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="text-muted mb-1">Upcoming</h6>
+                            <h3 class="fw-bold mb-0">@Model.UpcomingBookings</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stat-card border-0 shadow-sm" style="border-left: 4px solid #ffc107;">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="p-3 bg-warning bg-opacity-10 rounded-circle">
+                                <i class="fas fa-hourglass-half text-warning fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="text-muted mb-1">Pending</h6>
+                            <h3 class="fw-bold mb-0">@Model.PendingBookings</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stat-card border-0 shadow-sm" style="border-left: 4px solid #0d6efd;">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="p-3 bg-primary bg-opacity-10 rounded-circle">
+                                <i class="fas fa-check-circle text-primary fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="text-muted mb-1">Confirmed</h6>
+                            <h3 class="fw-bold mb-0">@Model.ConfirmedBookings</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stat-card border-0 shadow-sm" style="border-left: 4px solid #198754;">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="p-3 bg-success bg-opacity-10 rounded-circle">
+                                <i class="fas fa-check-double text-success fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="text-muted mb-1">Completed</h6>
+                            <h3 class="fw-bold mb-0">@Model.CompletedBookings</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stat-card border-0 shadow-sm" style="border-left: 4px solid #dc3545;">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="p-3 bg-danger bg-opacity-10 rounded-circle">
+                                <i class="fas fa-times-circle text-danger fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="text-muted mb-1">Cancelled</h6>
+                            <h3 class="fw-bold mb-0">@Model.CancelledBookings</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stat-card border-0 shadow-sm" style="border-left: 4px solid #6f42c1;">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="p-3 bg-purple bg-opacity-10 rounded-circle" style="background-color: rgba(111, 66, 193, 0.1);">
+                                <i class="fas fa-calendar-day" style="color: #6f42c1;" class="fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="text-muted mb-1">Today's Bookings</h6>
+                            <h3 class="fw-bold mb-0">@Model.TodayBookings</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Quick Actions</h5>
+                    <div class="btn-group flex-wrap" role="group">
+                        <a href="/Admin/Barbers" class="btn btn-primary me-2 mb-2">
+                            <i class="fas fa-cut me-1"></i> Manage Barbers
+                        </a>
+                        <a href="/Admin/Services" class="btn btn-primary me-2 mb-2">
+                            <i class="fas fa-concierge-bell me-1"></i> Manage Services
+                        </a>
+                        <a href="/Admin/Users" class="btn btn-primary me-2 mb-2">
+                            <i class="fas fa-users me-1"></i> Manage Users
+                        </a>
+                        <a href="/Receptionist/Appointments" class="btn btn-success me-2 mb-2">
+                            <i class="fas fa-calendar-alt me-1"></i> View All Appointments
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Appointments -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="card-title mb-0">Recent Appointments</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.RecentAppointments.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Customer</th>
+                                        <th>Barber</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var appointment in Model.RecentAppointments)
+                                    {
+                                        <tr>
+                                            <td>@appointment.AppointmentDate.ToString("MMM dd, yyyy")</td>
+                                            <td>@appointment.StartTime</td>
+                                            <td>@appointment.CustomerName</td>
+                                            <td>@appointment.BarberName</td>
+                                            <td>
+                                                <span class="badge bg-@(appointment.Status == "Completed" ? "success" : appointment.Status == "Confirmed" ? "primary" : appointment.Status == "Pending" ? "warning" : appointment.Status == "Cancelled" ? "danger" : "secondary")">
+                                                    @appointment.Status
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="/Receptionist/Appointments" class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-eye"></i> View
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-4">
+                            <i class="fas fa-calendar-times text-muted fs-1 mb-3"></i>
+                            <p class="text-muted">No recent appointments found.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

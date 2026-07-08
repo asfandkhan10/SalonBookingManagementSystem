@@ -17,7 +17,6 @@ public class CustomersController : ControllerBase
     }
 
     [HttpGet]
-    [AdministratorAuthorization]
     public async Task<ActionResult<ApiResponse<PagedResult<CustomerResponse>>>> GetCustomers(
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 10,

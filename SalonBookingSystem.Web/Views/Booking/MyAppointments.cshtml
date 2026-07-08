@@ -1,0 +1,88 @@
+@model List<AppointmentViewModel>
+@{
+    ViewData["Title"] = "My Appointments";
+}
+
+<section class="py-16 max-w-5xl mx-auto px-4">
+
+    <div class="flex justify-between items-start mb-10">
+        <div>
+            <span class="section-subtitle">My Account</span>
+            <h2 class="font-display text-3xl font-bold text-white">My <span class="text-gold-gradient">Appointments</span></h2>
+        </div>
+        <a asp-action="Index" asp-controller="Booking" class="btn-gold">
+            <i class="fas fa-plus mr-2"></i>Book New
+        </a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert-success mb-6">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert-error mb-6">@TempData["ErrorMessage"]</div>
+    }
+
+    @if (Model.Count == 0)
+    {
+        <div class="card p-16 text-center">
+            <i class="fas fa-calendar-plus text-5xl mb-6" style="color:#434343"></i>
+            <h3 class="text-xl font-semibold text-white mb-2">No appointments yet</h3>
+            <p class="text-gray-400 mb-8">Book your first appointment and experience our premium service.</p>
+            <a asp-action="Index" asp-controller="Booking" class="btn-gold">Book Your First Appointment</a>
+        </div>
+    }
+    else
+    {
+        <div class="space-y-4">
+            @foreach (var a in Model.OrderByDescending(x => x.AppointmentDate).ThenByDescending(x => x.StartTime))
+            {
+                <div class="card p-6">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <!-- Date block -->
+                        <div class="flex items-center gap-5">
+                            <div class="text-center w-16 rounded-xl py-3 flex-shrink-0" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2)">
+                                <div class="text-xs text-gray-400 uppercase">@a.AppointmentDate.ToString("MMM")</div>
+                                <div class="text-2xl font-display font-bold" style="color:#d4af37">@a.AppointmentDate.Day</div>
+                                <div class="text-xs text-gray-400">@a.AppointmentDate.ToString("ddd")</div>
+                            </div>
+
+                            <div>
+                                <div class="flex items-center gap-3 mb-1">
+                                    <span class="text-white font-semibold text-lg">@a.AppointmentDate.ToString("dddd, MMMM d yyyy")</span>
+                                    <span class="px-3 py-1 rounded-full text-xs font-medium @a.StatusBadgeClass">@a.Status</span>
+                                </div>
+                                <div class="flex flex-wrap gap-4 text-sm text-gray-400">
+                                    <span><i class="fas fa-clock mr-1" style="color:#d4af37"></i>@a.StartTime.ToString(@"hh\:mm") – @a.EndTime.ToString(@"hh\:mm")</span>
+                                    @if (!string.IsNullOrEmpty(a.BarberName))
+                                    {
+                                        <span><i class="fas fa-user-tie mr-1" style="color:#d4af37"></i>@a.BarberName</span>
+                                    }
+                                    <span><i class="fas fa-clock mr-1" style="color:#d4af37"></i>@a.TotalDurationMinutes min</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price + action -->
+                        <div class="flex items-center gap-4 md:flex-col md:items-end">
+                            <div class="text-xl font-bold" style="color:#d4af37">$@a.TotalAmount.ToString("0.00")</div>
+                            @if (a.CanCancel)
+                            {
+                                <form method="post" asp-action="Cancel" asp-controller="Booking" asp-route-id="@a.Id">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit"
+                                            class="text-sm px-4 py-2 rounded-lg transition-all"
+                                            style="border:1px solid rgba(239,68,68,0.4);color:#fca5a5;background:transparent"
+                                            onclick="return confirm('Cancel this appointment?')">
+                                        <i class="fas fa-times mr-1"></i>Cancel
+                                    </button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</section>

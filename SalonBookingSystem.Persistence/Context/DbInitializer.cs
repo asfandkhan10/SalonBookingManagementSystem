@@ -26,5 +26,24 @@ public static class DbInitializer
         {
             await roleManager.CreateAsync(new IdentityRole("Customer"));
         }
+
+        // Seed default admin user
+        var adminEmail = "admin@salon.com";
+        var adminUser = await userManager.FindByEmailAsync(adminEmail);
+        if (adminUser == null)
+        {
+            adminUser = new ApplicationUser
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                EmailConfirmed = true
+            };
+
+            var result = await userManager.CreateAsync(adminUser, "Admin123");
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(adminUser, "Administrator");
+            }
+        }
     }
 }

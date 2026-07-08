@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Hub Saloon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#d4af37',
+                        'gold-light': '#f5d76e',
+                        'dark-950': '#0d0d0d',
+                        'dark-900': '#1a1a1a',
+                        'dark-800': '#383838',
+                        'dark-700': '#434343',
+                        'dark-600': '#515151',
+                        'dark-500': '#666666',
+                        'dark-400': '#818181',
+                        'dark-300': '#a4a4a4',
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f5d76e;
+            --dark-950: #0d0d0d;
+            --dark-900: #1a1a1a;
+            --dark-800: #383838;
+            --dark-700: #434343;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-950);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .font-display { font-family: 'Playfair Display', serif; }
+
+        .text-gold-gradient {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .btn-gold {
+            background: linear-gradient(to right, var(--gold), var(--gold-light));
+            color: var(--dark-950);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-gold:hover {
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+            color: var(--dark-950);
+        }
+
+        .btn-outline {
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: rgba(212, 175, 55, 0.5);
+            color: var(--gold);
+        }
+
+        .card {
+            background: rgba(26, 26, 26, 0.5);
+            border: 1px solid var(--dark-700);
+            border-radius: 16px;
+            transition: all 0.5s;
+        }
+
+        .card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.05);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--gold);
+            font-size: 0.875rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .gold-text { color: var(--gold); }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #d4af37 !important;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark-900); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #434343;
+            border: 1px solid #515151;
+            border-radius: 8px;
+            color: #ffffff;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus { border-color: var(--gold); outline: none; }
+
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #86efac;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .field-validation-error { color: #fca5a5; font-size: 0.75rem; margin-top: 4px; display: block; }
+        .validation-summary-errors ul { list-style: none; padding: 0; }
+        .validation-summary-errors { color: #fca5a5; }
+
+        @@keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+
+        @@keyframes bounce {
+            0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
+            50% { transform: translateY(0); animation-timing-function: cubic-bezier(0,0,0.2,2); }
+        }
+        .animate-bounce { animation: bounce 1s infinite; }
+    </style>
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="hidden md:block bg-dark-950 border-b border-yellow-700/20 py-2">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm text-gray-400">
+            <div class="flex items-center gap-6">
+                <a href="tel:+1234567890" class="flex items-center gap-2 hover:text-yellow-400 transition-colors">
+                    <i class="fas fa-phone text-xs"></i>
+                    <span>+1 (234) 567-890</span>
+                </a>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-map-marker-alt text-xs"></i>
+                    <span>123 Main Street, Downtown</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fas fa-clock text-xs"></i>
+                <span>Mon - Sat: 9AM - 8PM</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-dark-950/95 backdrop-blur-xl shadow-lg shadow-black/20 border-b border-yellow-700/10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <a href="/" class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-500 to-yellow-300 flex items-center justify-center">
+                        <span class="font-display text-2xl font-bold text-dark-950">N</span>
+                    </div>
+                    <div class="hidden sm:block">
+                        <h1 class="font-display text-2xl font-bold text-gold-gradient">Hub</h1>
+                        <p class="text-xs text-gray-500 tracking-widest -mt-1">Saloon</p>
+                    </div>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="/#services" class="text-gray-300 hover:text-yellow-400 transition-colors text-sm font-medium">Services</a>
+                    <a href="/#team" class="text-gray-300 hover:text-yellow-400 transition-colors text-sm font-medium">Team</a>
+                    <a href="/#contact" class="text-gray-300 hover:text-yellow-400 transition-colors text-sm font-medium">Contact</a>
+                    @if (Context.Session.GetString("UserEmail") == "admin@salon.com")
+                    {
+                        <a href="/Admin/Dashboard" class="text-gray-300 hover:text-yellow-400 transition-colors text-sm font-medium">Admin Dashboard</a>
+                        <a href="/Auth/Logout" class="text-gray-400 hover:text-yellow-400 transition-colors text-sm">Logout</a>
+                    }
+                    else if (Context.Session.GetInt32("CustomerId") != null)
+                    {
+                        <a href="/Booking/MyAppointments" class="text-gray-300 hover:text-yellow-400 transition-colors text-sm font-medium">My Appointments</a>
+                        <a href="/Auth/Logout" class="text-gray-400 hover:text-yellow-400 transition-colors text-sm">Logout</a>
+                    }
+                    else
+                    {
+                        <a href="/Auth/Login" class="text-gray-300 hover:text-yellow-400 transition-colors text-sm font-medium">Login</a>
+                        <a href="/Auth/Register" class="text-gray-300 hover:text-yellow-400 transition-colors text-sm font-medium">Register</a>
+                    }
+                </div>
+
+                <div class="hidden lg:block">
+                    <a href="/Booking" class="btn-gold">Book Now</a>
+                </div>
+
+                <button id="mobile-menu-btn" class="lg:hidden p-2 text-gray-300 hover:text-yellow-400 transition-colors">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-dark-900/98 backdrop-blur-xl border-t border-yellow-700/10">
+            <div class="px-4 py-6 space-y-4">
+                <a href="/#services" class="block py-3 text-gray-300 hover:text-yellow-400 transition-colors text-lg font-medium">Services</a>
+                <a href="/#team" class="block py-3 text-gray-300 hover:text-yellow-400 transition-colors text-lg font-medium">Team</a>
+                <a href="/#contact" class="block py-3 text-gray-300 hover:text-yellow-400 transition-colors text-lg font-medium">Contact</a>
+                @if (Context.Session.GetString("UserEmail") == "admin@salon.com")
+                {
+                    <a href="/Admin/Dashboard" class="block py-3 text-gray-300 hover:text-yellow-400 transition-colors text-lg font-medium">Admin Dashboard</a>
+                    <a href="/Auth/Logout" class="block py-3 text-gray-400 hover:text-yellow-400 transition-colors text-lg font-medium">Logout</a>
+                }
+                else if (Context.Session.GetInt32("CustomerId") != null)
+                {
+                    <a href="/Booking/MyAppointments" class="block py-3 text-gray-300 hover:text-yellow-400 transition-colors text-lg font-medium">My Appointments</a>
+                    <a href="/Auth/Logout" class="block py-3 text-gray-400 hover:text-yellow-400 transition-colors text-lg font-medium">Logout</a>
+                }
+                else
+                {
+                    <a href="/Auth/Login" class="block py-3 text-gray-300 hover:text-yellow-400 transition-colors text-lg font-medium">Login</a>
+                    <a href="/Auth/Register" class="block py-3 text-gray-300 hover:text-yellow-400 transition-colors text-lg font-medium">Register</a>
+                }
+                <a href="/Booking" class="block w-full text-center py-4 btn-gold mt-4">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-950 border-t border-dark-700">
+        <div class="max-w-7xl mx-auto px-4 py-16">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div>
+                    <a href="/" class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-500 to-yellow-300 flex items-center justify-center">
+                            <span class="font-display text-2xl font-bold text-dark-950">N</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-2xl font-bold text-gold-gradient">NOIR</h3>
+                            <p class="text-xs text-gray-500 tracking-widest -mt-1">BARBER</p>
+                        </div>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Experience the art of traditional barbering with a modern twist. Premium grooming for the modern gentleman.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/" class="text-gray-400 hover:text-yellow-400 transition-colors text-sm">Home</a></li>
+                        <li><a href="/#services" class="text-gray-400 hover:text-yellow-400 transition-colors text-sm">Services</a></li>
+                        <li><a href="/#team" class="text-gray-400 hover:text-yellow-400 transition-colors text-sm">Team</a></li>
+                        <li><a href="/Booking" class="text-gray-400 hover:text-yellow-400 transition-colors text-sm">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><span class="text-gray-400 text-sm">Classic Haircut</span></li>
+                        <li><span class="text-gray-400 text-sm">Beard Trim</span></li>
+                        <li><span class="text-gray-400 text-sm">Hot Shave</span></li>
+                        <li><span class="text-gray-400 text-sm">Hair Design</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Contact</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="text-gray-400"><span class="gold-text">Address:</span><br>123 Main Street, Downtown</li>
+                        <li class="text-gray-400"><span class="gold-text">Phone:</span><br><a href="tel:+1234567890" class="hover:text-yellow-400 transition-colors">+1 (234) 567-890</a></li>
+                        <li class="text-gray-400"><span class="gold-text">Hours:</span><br>Mon - Sat: 9AM - 8PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-dark-700 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">&copy; @DateTime.Now.Year NOIR Barber. All rights reserved.</p>
+                <p class="text-gray-500 text-sm">Premium Grooming Experience</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

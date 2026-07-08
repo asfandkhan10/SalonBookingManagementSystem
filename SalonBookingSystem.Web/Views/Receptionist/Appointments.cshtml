@@ -1,0 +1,77 @@
+@model List<AppointmentViewModel>
+@{
+    ViewData["Title"] = "Manage Appointments";
+}
+
+<div class="container">
+    <h2>Manage Appointments</h2>
+    
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="mb-3">
+        <a asp-action="CreateAppointment" class="btn btn-primary">Create New Appointment</a>
+        <a asp-action="Customers" class="btn btn-secondary">Manage Customers</a>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Customer</th>
+                        <th>Barber</th>
+                        <th>Status</th>
+                        <th>Total Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var appointment in Model)
+                    {
+                        <tr>
+                            <td>@appointment.AppointmentDate.ToString("yyyy-MM-dd")</td>
+                            <td>@appointment.StartTime.ToString(@"hh\:mm")</td>
+                            <td>@appointment.CustomerName</td>
+                            <td>@appointment.BarberName</td>
+                            <td>
+                                <span class="badge @(appointment.Status == "Completed" ? "bg-success" : appointment.Status == "Cancelled" ? "bg-danger" : "bg-warning")">
+                                    @appointment.Status
+                                </span>
+                            </td>
+                            <td>@appointment.TotalAmount.ToString("C")</td>
+                            <td>
+                                @if (appointment.Status == "Pending" || appointment.Status == "Confirmed")
+                                {
+                                    <form method="post" asp-action="CompleteAppointment" asp-route-id="@appointment.Id" style="display:inline;">
+                                        <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Mark this appointment as completed?');">Complete</button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            No appointments found.
+        </div>
+    }
+</div>

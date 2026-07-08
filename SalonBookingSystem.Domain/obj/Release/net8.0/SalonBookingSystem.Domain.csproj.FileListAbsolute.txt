@@ -1,0 +1,12 @@
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\bin\Release\net8.0\SalonBookingSystem.Domain.deps.json
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\bin\Release\net8.0\SalonBookingSystem.Domain.dll
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\bin\Release\net8.0\SalonBookingSystem.Domain.pdb
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Release\net8.0\SalonBookingSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Release\net8.0\SalonBookingSystem.Domain.AssemblyInfoInputs.cache
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Release\net8.0\SalonBookingSystem.Domain.AssemblyInfo.cs
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Release\net8.0\SalonBookingSystem.Domain.csproj.CoreCompileInputs.cache
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Release\net8.0\SalonBookingSystem.Domain.sourcelink.json
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Release\net8.0\SalonBookingSystem.Domain.dll
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Release\net8.0\refint\SalonBookingSystem.Domain.dll
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Release\net8.0\SalonBookingSystem.Domain.pdb
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Domain\obj\Release\net8.0\ref\SalonBookingSystem.Domain.dll

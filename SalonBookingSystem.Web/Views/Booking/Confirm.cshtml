@@ -1,0 +1,119 @@
+@model BookingViewModel
+@{
+    ViewData["Title"] = "Confirm Booking";
+    var serviceIdsParam = string.Join(",", Model.SelectedServiceIds);
+}
+
+<section class="relative py-24" style="background:#0d0d0d">
+    <div class="relative max-w-4xl mx-auto px-4">
+
+        <div class="text-center mb-12">
+            <span class="section-subtitle">Almost Done</span>
+            <h2 class="section-title">Confirm Your <span class="text-gold-gradient">Booking</span></h2>
+        </div>
+
+        <!-- Step indicator -->
+        <div class="flex items-center justify-center gap-4 mb-10">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-green-400" style="background:#1a4731;border:1px solid #166534">
+                <i class="fas fa-check text-sm"></i>
+            </div>
+            <div style="width:64px;height:2px;background:#d4af37;margin:0 8px"></div>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-green-400" style="background:#1a4731;border:1px solid #166534">
+                <i class="fas fa-check text-sm"></i>
+            </div>
+            <div style="width:64px;height:2px;background:#d4af37;margin:0 8px"></div>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold" style="background:#d4af37;color:#0d0d0d">3</div>
+        </div>
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert-error mb-6">@TempData["ErrorMessage"]</div>
+        }
+
+        <div class="card p-6 md:p-8">
+            <h3 class="text-xl font-semibold text-white mb-6">Review Your Appointment</h3>
+
+            <!-- Booking summary -->
+            <div class="grid md:grid-cols-2 gap-4 mb-8">
+                <div class="rounded-xl p-5" style="background:#1a1a1a;border:1px solid #434343">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,0.1)">
+                            <i class="fas fa-user-tie" style="color:#d4af37"></i>
+                        </div>
+                        <div>
+                            <div class="text-gray-400 text-xs uppercase tracking-wide">Barber</div>
+                            <div class="text-white font-semibold">@Model.SelectedBarberName</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-xl p-5" style="background:#1a1a1a;border:1px solid #434343">
+                    <div class="flex items-center gap-3 mb-1">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,0.1)">
+                            <i class="fas fa-calendar" style="color:#d4af37"></i>
+                        </div>
+                        <div>
+                            <div class="text-gray-400 text-xs uppercase tracking-wide">Date &amp; Time</div>
+                            <div class="text-white font-semibold">
+                                @(DateTime.TryParse(Model.SelectedDate, out var dt) ? dt.ToString("dddd, MMMM d yyyy") : Model.SelectedDate)
+                                at @Model.SelectedTime
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services list -->
+            <div class="mb-8">
+                <h4 class="text-white font-medium mb-4">Services</h4>
+                <div class="space-y-3">
+                    @foreach (var s in Model.SelectedServices)
+                    {
+                        <div class="flex justify-between items-center py-3 px-4 rounded-lg" style="background:#1a1a1a;border:1px solid #434343">
+                            <div>
+                                <span class="text-white font-medium">@s.Name</span>
+                                <span class="text-gray-400 text-sm ml-2">@s.DurationMinutes min</span>
+                            </div>
+                            <span class="font-semibold" style="color:#d4af37">$@s.Price.ToString("0.00")</span>
+                        </div>
+                    }
+                </div>
+
+                <div class="flex justify-between items-center mt-4 pt-4" style="border-top:1px solid #434343">
+                    <div class="text-gray-400 text-sm">Total Duration: @Model.TotalDurationMinutes min</div>
+                    <div class="text-xl font-bold" style="color:#d4af37">Total: $@Model.TotalAmount.ToString("0.00")</div>
+                </div>
+            </div>
+
+            <!-- Confirm form -->
+            <form method="post" asp-action="Book" asp-controller="Booking">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="serviceIds" value="@serviceIdsParam" />
+                <input type="hidden" name="barberId" value="@Model.SelectedBarberId" />
+                <input type="hidden" name="date" value="@Model.SelectedDate" />
+                <input type="hidden" name="time" value="@Model.SelectedTime" />
+
+                <div class="rounded-xl p-4 mb-6" style="background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.2)">
+                    <div class="flex items-center gap-2 text-sm" style="color:#d4af37">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Your appointment will be confirmed immediately. You can cancel from My Appointments if needed.</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <a asp-action="SelectBarber" asp-controller="Booking"
+                       asp-route-serviceIds="@serviceIdsParam"
+                       asp-route-barberId="@Model.SelectedBarberId"
+                       asp-route-date="@Model.SelectedDate"
+                       asp-route-time="@Model.SelectedTime"
+                       class="btn-outline">
+                        <i class="fas fa-arrow-left mr-2"></i>Back
+                    </a>
+                    <button type="submit" class="btn-gold text-base px-8 py-3">
+                        <i class="fas fa-check mr-2"></i>Confirm Booking
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

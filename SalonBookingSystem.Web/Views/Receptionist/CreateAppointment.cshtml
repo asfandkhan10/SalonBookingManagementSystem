@@ -1,0 +1,108 @@
+@model ReceptionistBookingViewModel
+@{
+    ViewData["Title"] = "Create Appointment";
+    var customers = ViewBag.Customers as List<CustomerViewModel> ?? new List<CustomerViewModel>();
+}
+
+<section class="py-12 max-w-3xl mx-auto px-4">
+    <div class="mb-8">
+        <span class="section-subtitle">Receptionist</span>
+        <h2 class="font-display text-3xl font-bold text-white">Create <span class="text-gold-gradient">Appointment</span></h2>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert-success mb-6">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert-error mb-6">@TempData["ErrorMessage"]</div>
+    }
+
+    <div class="card p-8">
+        <form method="post" asp-action="CreateAppointment">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="validation-summary-errors mb-4"></div>
+
+            <!-- Customer -->
+            <div class="mb-6">
+                <label class="block text-gray-300 text-sm mb-2 font-medium">Customer <span class="text-red-400">*</span></label>
+                <select name="CustomerId" class="form-input" required>
+                    <option value="">-- Select Customer --</option>
+                    @foreach (var c in customers)
+                    {
+                        <option value="@c.Id" selected="@(Model.CustomerId == c.Id)">
+                            @c.FirstName @c.LastName — @c.Email
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <!-- Barber -->
+            <div class="mb-6">
+                <label asp-for="BarberId" class="block text-gray-300 text-sm mb-2 font-medium">
+                    Barber <span class="text-red-400">*</span>
+                </label>
+                <select asp-for="BarberId" class="form-input">
+                    <option value="">-- Select Barber --</option>
+                    @foreach (var b in Model.Barbers)
+                    {
+                        <option value="@b.Id">@b.FirstName @b.LastName</option>
+                    }
+                </select>
+                <span asp-validation-for="BarberId" class="field-validation-error"></span>
+            </div>
+
+            <!-- Date -->
+            <div class="mb-6">
+                <label asp-for="AppointmentDate" class="block text-gray-300 text-sm mb-2 font-medium">
+                    Appointment Date <span class="text-red-400">*</span>
+                </label>
+                <input asp-for="AppointmentDate" type="date" class="form-input"
+                       min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="AppointmentDate" class="field-validation-error"></span>
+            </div>
+
+            <!-- Start Time -->
+            <div class="mb-6">
+                <label asp-for="StartTime" class="block text-gray-300 text-sm mb-2 font-medium">
+                    Start Time <span class="text-red-400">*</span>
+                </label>
+                <input asp-for="StartTime" type="time" class="form-input" />
+                <span asp-validation-for="StartTime" class="field-validation-error"></span>
+            </div>
+
+            <!-- Services -->
+            <div class="mb-8">
+                <label class="block text-gray-300 text-sm mb-3 font-medium">
+                    Services <span class="text-red-400">*</span>
+                </label>
+                <div class="grid sm:grid-cols-2 gap-3">
+                    @foreach (var s in Model.Services)
+                    {
+                        <label class="flex items-start gap-3 p-4 rounded-xl cursor-pointer transition-all"
+                               style="border: 1px solid #515151; background: rgba(26,26,26,0.5)">
+                            <input type="checkbox" name="SelectedServiceIds" value="@s.Id"
+                                   class="mt-1 accent-yellow-400"
+                                   @(Model.SelectedServiceIds.Contains(s.Id) ? "checked" : "") />
+                            <div>
+                                <div class="text-white font-medium text-sm">@s.Name</div>
+                                <div class="text-gray-400 text-xs mt-1">
+                                    <span style="color: #d4af37">$@s.Price.ToString("0.00")</span>
+                                    · @s.DurationMinutes min
+                                </div>
+                            </div>
+                        </label>
+                    }
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button type="submit" class="btn-gold">
+                    <i class="fas fa-calendar-plus mr-2"></i>Create Appointment
+                </button>
+                <a asp-action="Appointments" class="btn-outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>

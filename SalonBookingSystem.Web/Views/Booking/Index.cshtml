@@ -1,0 +1,153 @@
+@model BookingViewModel
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+
+<section class="relative py-24" style="background: #0d0d0d">
+    <div class="absolute inset-0 opacity-5"
+         style="background-image: repeating-linear-gradient(45deg,#d4af37 0,#d4af37 1px,transparent 0,transparent 50%);background-size:20px 20px"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4">
+
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <span class="section-subtitle">Schedule</span>
+            <h2 class="section-title">Book Your <span class="text-gold-gradient">Appointment</span></h2>
+            <p class="text-gray-300 max-w-2xl mx-auto text-lg">
+                Select your services, choose a barber and time, then confirm your booking.
+            </p>
+        </div>
+
+        @if (TempData["InfoMessage"] != null)
+        {
+            <div class="alert-success mb-6 text-center">@TempData["InfoMessage"]</div>
+        }
+
+        <!-- Step indicator -->
+        <div class="flex items-center justify-center gap-4 mb-10">
+            @{
+                string StepClass(int n) => n <= 1
+                    ? "w-10 h-10 rounded-full flex items-center justify-center font-semibold"
+                    : "w-10 h-10 rounded-full flex items-center justify-center font-semibold text-gray-400";
+                string StepStyle(int n) => n <= 1
+                    ? "background:#d4af37;color:#0d0d0d"
+                    : "background:#434343";
+                string LineStyle(int n) => n < 1
+                    ? "width:64px;height:2px;background:#d4af37;margin:0 8px"
+                    : "width:64px;height:2px;background:#434343;margin:0 8px";
+            }
+            <div class="@StepClass(1)" style="@StepStyle(1)">1</div>
+            <div style="@LineStyle(1)"></div>
+            <div class="@StepClass(2)" style="@StepStyle(2)">2</div>
+            <div style="@LineStyle(2)"></div>
+            <div class="@StepClass(3)" style="@StepStyle(3)">3</div>
+        </div>
+
+        <div class="card p-6 md:p-8">
+            <h3 class="text-xl font-semibold text-white mb-2">Step 1 — Select Services</h3>
+            <p class="text-gray-400 text-sm mb-8">Choose one or more services for your appointment.</p>
+
+            <form method="get" asp-action="SelectBarber" asp-controller="Booking" id="serviceForm">
+                <div class="grid md:grid-cols-2 gap-4 mb-8" id="serviceGrid">
+                    @foreach (var s in Model.Services)
+                    {
+                        <label class="service-card flex items-start gap-4 p-5 rounded-xl cursor-pointer transition-all duration-300"
+                               style="border: 2px solid #515151; background: rgba(26,26,26,0.5)"
+                               data-id="@s.Id">
+                            <input type="checkbox" name="serviceIds" value="@s.Id"
+                                   class="service-cb mt-1 accent-yellow-400" style="width:18px;height:18px" />
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-semibold text-white">@s.Name</h4>
+                                    <span class="font-bold ml-2" style="color:#d4af37">$@s.Price.ToString("0.00")</span>
+                                </div>
+                                <p class="text-gray-400 text-sm mt-1">@s.Description</p>
+                                <div class="flex items-center gap-1 mt-2 text-gray-500 text-xs">
+                                    <i class="fas fa-clock" style="color:#d4af37"></i>
+                                    <span>@s.DurationMinutes min</span>
+                                </div>
+                            </div>
+                        </label>
+                    }
+                </div>
+
+                <!-- Running total -->
+                <div class="rounded-xl p-4 mb-8" style="background:#1a1a1a;border:1px solid #434343" id="totalBar">
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-gray-400">Selected:</span>
+                        <span class="text-white font-medium" id="selectedCount">0 service(s)</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm mt-2">
+                        <span class="text-gray-400">Total Duration:</span>
+                        <span class="text-white font-medium" id="totalDuration">0 min</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="text-gray-400 text-sm">Total Price:</span>
+                        <span class="text-xl font-bold" style="color:#d4af37" id="totalPrice">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="submit" id="nextBtn" class="btn-gold opacity-50 cursor-not-allowed" disabled>
+                        Next: Choose Barber &amp; Time <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        // Build service data map for client-side total calculation
+        const serviceData = {
+            @foreach (var s in Model.Services)
+            {
+                @Html.Raw($"{s.Id}: {{ price: {s.Price}, duration: {s.DurationMinutes} }},")
+            }
+        };
+
+        const cbs = document.querySelectorAll('.service-cb');
+        const cards = document.querySelectorAll('.service-card');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function updateTotals() {
+            let count = 0, price = 0, duration = 0;
+            cbs.forEach(cb => {
+                if (cb.checked) {
+                    const d = serviceData[cb.value];
+                    if (d) { price += d.price; duration += d.duration; count++; }
+                }
+            });
+
+            document.getElementById('selectedCount').textContent = count + ' service(s)';
+            document.getElementById('totalDuration').textContent = duration + ' min';
+            document.getElementById('totalPrice').textContent = '$' + price.toFixed(2);
+
+            if (count > 0) {
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                nextBtn.disabled = true;
+                nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        // Clicking the card label toggles the checkbox and highlights the card
+        cards.forEach(card => {
+            card.addEventListener('change', function () {
+                const cb = this.querySelector('.service-cb');
+                if (cb && cb.checked) {
+                    this.style.borderColor = '#d4af37';
+                    this.style.background = 'rgba(212,175,55,0.08)';
+                } else {
+                    this.style.borderColor = '#515151';
+                    this.style.background = 'rgba(26,26,26,0.5)';
+                }
+                updateTotals();
+            });
+        });
+
+        updateTotals();
+    </script>
+}

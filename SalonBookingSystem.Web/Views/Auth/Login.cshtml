@@ -1,0 +1,51 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<section class="min-h-screen flex items-center justify-center py-16 px-4" style="background:#0d0d0d">
+    <div class="w-full max-w-md">
+
+        <div class="text-center mb-10">
+            <div class="inline-flex w-16 h-16 rounded-xl items-center justify-center mb-4"
+                 style="background: linear-gradient(to bottom right,#d4af37,#f5d76e)">
+                <span class="font-display text-3xl font-bold" style="color:#0d0d0d">N</span>
+            </div>
+            <h1 class="font-display text-3xl font-bold text-white">Welcome Back</h1>
+            <p class="text-gray-400 mt-2">Sign in to manage your appointments</p>
+        </div>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert-success mb-6">@TempData["SuccessMessage"]</div>
+        }
+
+        <div class="card p-8">
+            <form method="post" asp-action="Login">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="validation-summary-errors mb-4"></div>
+
+                <div class="mb-5">
+                    <label asp-for="Email" class="block text-gray-300 text-sm mb-2 font-medium">Email</label>
+                    <input asp-for="Email" type="email" class="form-input" placeholder="you@email.com" />
+                    <span asp-validation-for="Email" class="field-validation-error"></span>
+                </div>
+
+                <div class="mb-8">
+                    <label asp-for="Password" class="block text-gray-300 text-sm mb-2 font-medium">Password</label>
+                    <input asp-for="Password" type="password" class="form-input" placeholder="••••••••" />
+                    <span asp-validation-for="Password" class="field-validation-error"></span>
+                </div>
+
+                <button type="submit" class="w-full btn-gold py-3 text-base">
+                    Sign In <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </form>
+
+            <p class="text-center text-gray-400 text-sm mt-6">
+                Don't have an account?
+                <a asp-action="Register" asp-controller="Auth" class="hover:text-yellow-300 transition-colors font-medium" style="color:#d4af37">Register here</a>
+            </p>
+        </div>
+    </div>
+</section>

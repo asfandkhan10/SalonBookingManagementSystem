@@ -1,0 +1,237 @@
+@model HomeViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Section -->
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1920&h=1080&fit=crop"
+             alt="Barber shop interior" class="w-full h-full object-cover">
+        <div class="absolute inset-0" style="background: linear-gradient(to right, #0d0d0d, rgba(13,13,13,0.9), rgba(13,13,13,0.7))"></div>
+        <div class="absolute inset-0" style="background: linear-gradient(to top, #0d0d0d, transparent, rgba(13,13,13,0.5))"></div>
+    </div>
+
+    <div class="absolute top-20 right-20 w-64 h-64 rounded-full blur-3xl" style="background: rgba(212,175,55,0.1)"></div>
+    <div class="absolute bottom-20 left-20 w-96 h-96 rounded-full blur-3xl" style="background: rgba(212,175,55,0.05)"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 py-20">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="animate-fade-in-up">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
+                     style="background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2)">
+                    <i class="fas fa-star text-sm" style="color: #d4af37"></i>
+                    <span class="text-sm font-medium" style="color: #d4af37">Premium Grooming Experience</span>
+                </div>
+
+                <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+                    Where Style Meets
+                    <span class="block text-gold-gradient">Precision</span>
+                </h1>
+
+                <p class="text-gray-300 text-lg md:text-xl max-w-xl mb-8 leading-relaxed">
+                    Experience the art of traditional barbering with a modern twist.
+                    Our master barbers craft your perfect look with precision and care.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="/Booking" class="btn-gold flex items-center justify-center gap-2">
+                        <i class="fas fa-scissors"></i>
+                        Book Appointment
+                    </a>
+                    <a href="#services" class="btn-outline">Our Services</a>
+                </div>
+
+                <div class="grid grid-cols-3 gap-8 mt-12 pt-8" style="border-top: 1px solid #434343">
+                    <div>
+                        <div class="text-3xl md:text-4xl font-display font-bold gold-text">@Model.Barbers.Count</div>
+                        <div class="text-gray-400 text-sm mt-1">Expert Barbers</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl font-display font-bold gold-text">@Model.Services.Count</div>
+                        <div class="text-gray-400 text-sm mt-1">Services</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl font-display font-bold gold-text">4.9</div>
+                        <div class="text-gray-400 text-sm mt-1">Rating</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden lg:block relative">
+                <div class="relative">
+                    <div class="absolute inset-0 rounded-3xl blur-2xl" style="background: linear-gradient(to bottom right, rgba(212,175,55,0.2), transparent)"></div>
+                    <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&h=700&fit=crop"
+                         alt="Barber at work" class="relative rounded-3xl shadow-2xl" style="border: 1px solid rgba(212,175,55,0.1)">
+                    <div class="absolute -bottom-6 -left-6 glass rounded-2xl p-4 shadow-xl">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: rgba(212,175,55,0.2)">
+                                <i class="fas fa-star" style="color: #d4af37"></i>
+                            </div>
+                            <div>
+                                <div class="text-white font-semibold">Top Rated</div>
+                                <div class="text-gray-400 text-sm">500+ Reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <a href="#services" class="flex flex-col items-center gap-2 text-gray-400 hover:text-yellow-400 transition-colors">
+            <span class="text-xs tracking-widest uppercase">Scroll</span>
+            <i class="fas fa-chevron-down animate-bounce"></i>
+        </a>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="relative py-24" style="background: #0d0d0d">
+    <div class="relative max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <span class="section-subtitle">What We Offer</span>
+            <h2 class="section-title">Our Premium <span class="text-gold-gradient">Services</span></h2>
+            <p class="text-gray-300 max-w-2xl mx-auto text-lg">
+                From classic cuts to modern styles, our expert barbers deliver exceptional grooming tailored to you.
+            </p>
+        </div>
+
+        @if (Model.Services.Any())
+        {
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach (var service in Model.Services.Take(6))
+                {
+                    <div class="card overflow-hidden group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400&h=250&fit=crop" alt="@service.Name" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0" style="background: linear-gradient(to top, #1a1a1a, transparent)"></div>
+                            <div class="absolute top-4 right-4 px-3 py-1 font-semibold rounded-full text-sm" style="background: #d4af37; color: #0d0d0d">$@service.Price</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold text-white mb-2 group-hover:text-yellow-400 transition-colors">@service.Name</h3>
+                            <p class="text-gray-400 text-sm mb-4">@service.Description</p>
+                            <div class="flex items-center justify-between pt-4" style="border-top: 1px solid #434343">
+                                <div class="flex items-center gap-2 text-gray-400 text-sm">
+                                    <i class="fas fa-clock" style="color: #d4af37"></i>
+                                    <span>@service.DurationMinutes min</span>
+                                </div>
+                                <a href="/Booking" class="font-medium text-sm hover:text-yellow-300 transition-colors" style="color: #d4af37">Book Now →</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="text-center text-gray-400">
+                <p>No services available at the moment. Please check back later.</p>
+            </div>
+        }
+
+        <div class="text-center mt-12">
+            <a href="/Booking" class="btn-gold">View All Services & Book</a>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section id="team" class="relative py-24" style="background: #1a1a1a">
+    <div class="relative max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <span class="section-subtitle">Our Experts</span>
+            <h2 class="section-title">Meet Our <span class="text-gold-gradient">Team</span></h2>
+            <p class="text-gray-300 max-w-2xl mx-auto text-lg">
+                Our skilled barbers bring years of experience and passion to every cut.
+            </p>
+        </div>
+
+        @if (Model.Barbers.Any())
+        {
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                @foreach (var barber in Model.Barbers.Where(b => b.IsActive))
+                {
+                    <div class="card overflow-hidden group">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop" alt="@barber.FirstName @barber.LastName" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0" style="background: linear-gradient(to top, #1a1a1a, transparent)"></div>
+                            @if (barber.IsActive)
+                            {
+                                <div class="absolute top-4 right-4 px-3 py-1 font-semibold rounded-full text-sm" style="background: rgba(34,197,94,0.2); color: #86efac; border: 1px solid rgba(34,197,94,0.3)">
+                                    Available
+                                </div>
+                            }
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="font-display text-xl font-semibold text-white mb-1">@barber.FirstName @barber.LastName</h3>
+                            <p class="text-gray-400 text-sm mb-3">Master Barber</p>
+                            <a href="/Booking" class="btn-outline text-sm">Book with @barber.FirstName</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="text-center text-gray-400">
+                <p>No barbers available at the moment. Please check back later.</p>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="relative py-20" style="background: linear-gradient(to right, #1a1a1a, #0d0d0d)">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <span class="section-subtitle">Ready?</span>
+        <h2 class="section-title">Book Your <span class="text-gold-gradient">Appointment</span></h2>
+        <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+            Join thousands of satisfied clients. Reserve your spot with one of our master barbers today.
+        </p>
+        <a href="/Booking" class="btn-gold text-lg px-8 py-4">
+            <i class="fas fa-scissors mr-2"></i> Book Now — It's Easy
+        </a>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="relative py-24" style="background: #1a1a1a">
+    <div class="relative max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <span class="section-subtitle">Get In Touch</span>
+            <h2 class="section-title">Visit Our <span class="text-gold-gradient">Shop</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="card p-6 text-center">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4" style="background: rgba(212,175,55,0.1)">
+                    <i class="fas fa-map-marker-alt text-xl" style="color: #d4af37"></i>
+                </div>
+                <h3 class="text-white font-semibold mb-2">Location</h3>
+                <p class="text-gray-400 text-sm">123 Main Street<br>Downtown, NY 10001</p>
+            </div>
+            <div class="card p-6 text-center">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4" style="background: rgba(212,175,55,0.1)">
+                    <i class="fas fa-phone text-xl" style="color: #d4af37"></i>
+                </div>
+                <h3 class="text-white font-semibold mb-2">Phone</h3>
+                <a href="tel:+1234567890" class="text-gray-400 text-sm hover:text-yellow-400 transition-colors">+1 (234) 567-890</a>
+            </div>
+            <div class="card p-6 text-center">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4" style="background: rgba(212,175,55,0.1)">
+                    <i class="fas fa-envelope text-xl" style="color: #d4af37"></i>
+                </div>
+                <h3 class="text-white font-semibold mb-2">Email</h3>
+                <a href="mailto:info@noirbarber.com" class="text-gray-400 text-sm hover:text-yellow-400 transition-colors">info@noirbarber.com</a>
+            </div>
+            <div class="card p-6 text-center">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4" style="background: rgba(212,175,55,0.1)">
+                    <i class="fas fa-clock text-xl" style="color: #d4af37"></i>
+                </div>
+                <h3 class="text-white font-semibold mb-2">Hours</h3>
+                <p class="text-gray-400 text-sm">Mon - Sat: 9AM - 8PM<br>Sunday: Closed</p>
+            </div>
+        </div>
+    </div>
+</section>

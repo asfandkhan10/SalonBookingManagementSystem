@@ -1,0 +1,142 @@
+@model BookingViewModel
+@{
+    ViewData["Title"] = "Choose Barber & Time";
+    var serviceIdsParam = string.Join(",", Model.SelectedServiceIds);
+}
+
+<section class="relative py-24" style="background:#0d0d0d">
+    <div class="relative max-w-4xl mx-auto px-4">
+
+        <div class="text-center mb-12">
+            <span class="section-subtitle">Schedule</span>
+            <h2 class="section-title">Book Your <span class="text-gold-gradient">Appointment</span></h2>
+        </div>
+
+        <!-- Step indicator -->
+        <div class="flex items-center justify-center gap-4 mb-10">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-green-400" style="background:#1a4731;border:1px solid #166534">
+                <i class="fas fa-check text-sm"></i>
+            </div>
+            <div style="width:64px;height:2px;background:#d4af37;margin:0 8px"></div>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold" style="background:#d4af37;color:#0d0d0d">2</div>
+            <div style="width:64px;height:2px;background:#434343;margin:0 8px"></div>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-gray-400" style="background:#434343">3</div>
+        </div>
+
+        <div class="card p-6 md:p-8">
+            <h3 class="text-xl font-semibold text-white mb-1">Step 2 — Choose Barber &amp; Time</h3>
+            <p class="text-gray-400 text-sm mb-8">Select your preferred barber, pick a date, then choose an available slot.</p>
+
+            <!-- Selected services summary -->
+            <div class="rounded-xl p-4 mb-8 flex flex-wrap gap-2" style="background:#1a1a1a;border:1px solid #434343">
+                <span class="text-gray-400 text-sm mr-2 self-center">Services:</span>
+                @foreach (var s in Model.SelectedServices)
+                {
+                    <span class="px-3 py-1 rounded-full text-sm" style="background:rgba(212,175,55,0.15);color:#d4af37;border:1px solid rgba(212,175,55,0.3)">
+                        @s.Name (@s.DurationMinutes min)
+                    </span>
+                }
+                <span class="ml-auto self-center text-sm font-bold" style="color:#d4af37">
+                    $@Model.TotalAmount.ToString("0.00") · @Model.TotalDurationMinutes min total
+                </span>
+            </div>
+
+            <!-- Barbers -->
+            <div class="mb-8">
+                <h4 class="text-white font-medium mb-4">Select Barber</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    @foreach (var b in Model.Barbers)
+                    {
+                        var isSelected = Model.SelectedBarberId == b.Id;
+                        <a href="@Url.Action("SelectBarber", new { serviceIds = serviceIdsParam, barberId = b.Id, date = Model.SelectedDate })"
+                           class="p-4 rounded-xl text-center transition-all duration-300"
+                           style="border: 2px solid @(isSelected ? "#d4af37" : "#515151");background:@(isSelected ? "rgba(212,175,55,0.1)" : "rgba(26,26,26,0.5)")">
+                            <div class="w-14 h-14 rounded-full mx-auto mb-3 flex items-center justify-center text-2xl font-display font-bold"
+                                 style="background:@(isSelected ? "rgba(212,175,55,0.3)" : "#434343");color:@(isSelected ? "#d4af37" : "#a4a4a4")">
+                                @b.FirstName.Substring(0, 1)
+                            </div>
+                            <h4 class="text-sm font-medium @(isSelected ? "text-yellow-400" : "text-white")">@b.FullName</h4>
+                        </a>
+                    }
+                </div>
+            </div>
+
+            @if (Model.SelectedBarberId.HasValue)
+            {
+                <!-- Date picker — next 14 days -->
+                <div class="mb-8">
+                    <h4 class="text-white font-medium mb-4">Select Date</h4>
+                    <div class="grid grid-cols-3 md:grid-cols-7 gap-2">
+                        @{
+                            for (int i = 1; i <= 14; i++)
+                            {
+                                var date = DateTime.Today.AddDays(i);
+                                var dateStr = date.ToString("yyyy-MM-dd");
+                                var isSelectedDate = Model.SelectedDate == dateStr;
+                                var isSunday = date.DayOfWeek == DayOfWeek.Sunday;
+                                <a href="@(isSunday ? "#" : Url.Action("SelectBarber", new { serviceIds = serviceIdsParam, barberId = Model.SelectedBarberId, date = dateStr }))"
+                                   class="p-3 rounded-lg text-center transition-all duration-300 @(isSunday ? "opacity-30 cursor-not-allowed" : "")"
+                                   style="background:@(isSelectedDate ? "#d4af37" : "#434343");color:@(isSelectedDate ? "#0d0d0d" : "#a4a4a4")">
+                                    <div class="text-xs">@date.ToString("ddd")</div>
+                                    <div class="text-sm font-semibold">@date.Day</div>
+                                    <div class="text-xs">@date.ToString("MMM")</div>
+                                </a>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+
+            @if (Model.SelectedBarberId.HasValue && !string.IsNullOrEmpty(Model.SelectedDate))
+            {
+                <!-- Time slots -->
+                <div class="mb-8">
+                    <h4 class="text-white font-medium mb-4">Available Time Slots</h4>
+                    @if (Model.AvailableSlots.Count == 0)
+                    {
+                        <div class="text-center py-8">
+                            <i class="fas fa-calendar-times text-3xl mb-3 text-gray-600"></i>
+                            <p class="text-gray-400">No available slots for this date. Please choose a different date or barber.</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="grid grid-cols-4 md:grid-cols-6 gap-2">
+                            @foreach (var slot in Model.AvailableSlots)
+                            {
+                                var isSelectedSlot = Model.SelectedTime == slot;
+                                <a href="@Url.Action("SelectBarber", new { serviceIds = serviceIdsParam, barberId = Model.SelectedBarberId, date = Model.SelectedDate, time = slot })"
+                                   class="py-2 px-3 rounded-lg text-sm text-center transition-all duration-300"
+                                   style="background:@(isSelectedSlot ? "#d4af37" : "#434343");color:@(isSelectedSlot ? "#0d0d0d" : "#a4a4a4")">
+                                    @slot
+                                </a>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+
+            <!-- Nav buttons -->
+            <div class="flex justify-between items-center pt-4" style="border-top:1px solid #434343">
+                <a asp-action="Index" asp-controller="Booking" class="btn-outline">
+                    <i class="fas fa-arrow-left mr-2"></i>Back
+                </a>
+                @if (Model.SelectedBarberId.HasValue && !string.IsNullOrEmpty(Model.SelectedDate) && !string.IsNullOrEmpty(Model.SelectedTime))
+                {
+                    <a asp-action="Confirm" asp-controller="Booking"
+                       asp-route-serviceIds="@serviceIdsParam"
+                       asp-route-barberId="@Model.SelectedBarberId"
+                       asp-route-date="@Model.SelectedDate"
+                       asp-route-time="@Model.SelectedTime"
+                       class="btn-gold">
+                        Next: Confirm <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                }
+                else
+                {
+                    <span class="text-gray-500 text-sm">Select barber, date and time to continue</span>
+                }
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,77 @@
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<section class="min-h-screen flex items-center justify-center py-16 px-4" style="background:#0d0d0d">
+    <div class="w-full max-w-md">
+
+        <div class="text-center mb-10">
+            <div class="inline-flex w-16 h-16 rounded-xl items-center justify-center mb-4"
+                 style="background: linear-gradient(to bottom right,#d4af37,#f5d76e)">
+                <span class="font-display text-3xl font-bold" style="color:#0d0d0d">N</span>
+            </div>
+            <h1 class="font-display text-3xl font-bold text-white">Create Account</h1>
+            <p class="text-gray-400 mt-2">Join us and book your first appointment</p>
+        </div>
+
+        <div class="card p-8">
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger mb-4">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
+            <form method="post" asp-action="Register">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="validation-summary-errors mb-4"></div>
+
+                <div class="grid grid-cols-2 gap-4 mb-5">
+                    <div>
+                        <label asp-for="FirstName" class="block text-gray-300 text-sm mb-2 font-medium">First Name</label>
+                        <input asp-for="FirstName" class="form-input" placeholder="John" />
+                        <span asp-validation-for="FirstName" class="field-validation-error"></span>
+                    </div>
+                    <div>
+                        <label asp-for="LastName" class="block text-gray-300 text-sm mb-2 font-medium">Last Name</label>
+                        <input asp-for="LastName" class="form-input" placeholder="Smith" />
+                        <span asp-validation-for="LastName" class="field-validation-error"></span>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <label asp-for="Email" class="block text-gray-300 text-sm mb-2 font-medium">Email</label>
+                    <input asp-for="Email" type="email" class="form-input" placeholder="you@email.com" />
+                    <span asp-validation-for="Email" class="field-validation-error"></span>
+                </div>
+
+                <div class="mb-5">
+                    <label asp-for="PhoneNumber" class="block text-gray-300 text-sm mb-2 font-medium">Phone Number</label>
+                    <input asp-for="PhoneNumber" type="tel" class="form-input" placeholder="+1 234 567 890" />
+                    <span asp-validation-for="PhoneNumber" class="field-validation-error"></span>
+                </div>
+
+                <div class="mb-5">
+                    <label asp-for="Password" class="block text-gray-300 text-sm mb-2 font-medium">Password</label>
+                    <input asp-for="Password" type="password" class="form-input" placeholder="••••••••" />
+                    <span asp-validation-for="Password" class="field-validation-error"></span>
+                </div>
+
+                <div class="mb-8">
+                    <label asp-for="ConfirmPassword" class="block text-gray-300 text-sm mb-2 font-medium">Confirm Password</label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-input" placeholder="••••••••" />
+                    <span asp-validation-for="ConfirmPassword" class="field-validation-error"></span>
+                </div>
+
+                <button type="submit" class="w-full btn-gold py-3 text-base">
+                    Create Account <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </form>
+
+            <p class="text-center text-gray-400 text-sm mt-6">
+                Already have an account?
+                <a asp-action="Login" asp-controller="Auth" class="hover:text-yellow-300 transition-colors font-medium" style="color:#d4af37">Sign in</a>
+            </p>
+        </div>
+    </div>
+</section>

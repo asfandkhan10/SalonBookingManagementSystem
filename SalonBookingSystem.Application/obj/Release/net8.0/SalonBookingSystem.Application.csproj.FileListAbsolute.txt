@@ -1,0 +1,16 @@
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\bin\Release\net8.0\SalonBookingSystem.Application.deps.json
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\bin\Release\net8.0\SalonBookingSystem.Application.dll
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\bin\Release\net8.0\SalonBookingSystem.Application.pdb
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\bin\Release\net8.0\SalonBookingSystem.Domain.dll
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\bin\Release\net8.0\SalonBookingSystem.Domain.pdb
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\obj\Release\net8.0\SalonBookingSystem.Application.csproj.AssemblyReference.cache
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\obj\Release\net8.0\SalonBookingSystem.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\obj\Release\net8.0\SalonBookingSystem.Application.AssemblyInfoInputs.cache
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\obj\Release\net8.0\SalonBookingSystem.Application.AssemblyInfo.cs
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\obj\Release\net8.0\SalonBookingSystem.Application.csproj.CoreCompileInputs.cache
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\obj\Release\net8.0\SalonBookingSystem.Application.sourcelink.json
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\obj\Release\net8.0\SalonBoo.DF2CD8A7.Up2Date
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\obj\Release\net8.0\SalonBookingSystem.Application.dll
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\obj\Release\net8.0\refint\SalonBookingSystem.Application.dll
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\obj\Release\net8.0\SalonBookingSystem.Application.pdb
+D:\db\SalonBookingManagementSystem\SalonBookingSystem.Application\obj\Release\net8.0\ref\SalonBookingSystem.Application.dll
